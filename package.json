@@ -1,0 +1,24 @@
+{
+  "name": "airbnb-parser",
+  "version": "0.0.1",
+  "description": "Extract information from airbnb email notifications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "airbnb",
+    "parser",
+    "messages",
+    "notification"
+  ],
+  "author": "Kennedy Idialu <kennedyidialu@gmail.com> (ncodes.wordpress.com)",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.3.5",
+    "cheerio": "^0.20.0",
+    "html-tokenize": "^1.2.5",
+    "lodash": "^4.11.2",
+    "slick": "^1.12.2"
+  }
+}
