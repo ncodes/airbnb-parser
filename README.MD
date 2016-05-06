@@ -29,7 +29,7 @@ AirbnbParser.parse(reservationMsg, function(err, result){
 
 Returns:
 
-```json
+```js
 { 
 	reservation_reply: { 
    		listing: 'Ajegunle House',
@@ -43,6 +43,7 @@ Returns:
 	    reply_to: null 
 	} 
 }
+```
 
 This library currently parses the following types of notifications:
 
@@ -50,7 +51,7 @@ This library currently parses the following types of notifications:
 
 Parse message sent by guests. The response object content is:
 
-```
+```js
 { 
 	inquiry:{ 
    		listing: 'My Home Listing',
@@ -70,7 +71,7 @@ Parse message sent by guests. The response object content is:
 
 Parse message sent by guests about a reservation request.
 
-```
+```js
 { 
 	reservation_reply: { 
     	listing: 'Ajegunle House',
@@ -90,7 +91,7 @@ Parse message sent by guests about a reservation request.
 
 Parse message that confirms a reservation that has been paid for.
 
-```
+```js
 { 
 	reservation_confirmed: { 
 		guest_name: 'Odion',
@@ -108,7 +109,7 @@ Parse message that confirms a reservation that has been paid for.
 
 Parse a reservation cancelation message
 
-```
+```js
 { 
 	reservation_canceled: { 
 		confirmation_code: 'DDBSTM',
