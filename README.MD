@@ -102,6 +102,25 @@ Parse message about a reservation request
 }
 ```
 
+### reservation_reminder
+
+Parse message about a reservation that has been made 
+
+```js
+{
+   reservation_reminder:{
+      listing: 'My Home Listing',
+      check_in: { day: 'Sat', month: 'April', date: '30', year: '2016' },
+      check_out: { day: 'Sun', month: 'May', date: '01', year: '2016' },
+      num_guest: '1',
+      listing_url: 'http://airbnb.com/roooms/82365255',
+      guest_name: 'Odion Olumhense',
+      guest_message: 'Hi James, This is a reminder that...',
+      reply_to: null
+   }
+}
+``` 
+
 #### reservation_reply
 
 Parse message sent by guests about a reservation request.
@@ -134,7 +153,7 @@ Parse message that confirms a reservation that has been paid for.
       check_in: { day: 'Mon', month: 'May', date: '9' },
       check_out: { day: 'Tue', month: 'May', date: '10' },
       num_guest: '2',
-      confirmation_code: 'DDBSTM',
+      confirmation_code: 'DDYUTM',
       reply_to: null 
    }
 }
@@ -147,12 +166,57 @@ Parse a reservation cancelation message
 ```js
 {
    reservation_canceled: { 
-      confirmation_code: 'DDBSTM',
+      confirmation_code: 'DDYUTM',
       month: 'May',
       date: '09',
       year: '2016',
       reply_to: null 
    } 
+}
+```
+
+#### payout_received
+
+Parse a payout notification message
+
+```js
+{
+   payout_received: {
+      amount_paid: '$10',
+      payment_method: 'PayPal',
+      confirmation_code: 'PDMKQ',
+      guest_name: 'Sarah Jackson',
+      expected_payment_date: { date: '11', month: 'Mar', year: '2016' },
+      reply_to: null
+   }
+}
+```
+
+#### read_review
+
+Parse a message about reading guest reviews
+
+```js
+{
+   read_review: {
+      guest_name: 'Sarah',
+      public_review: 'Awesome place to stay. Would definitely recommend it. ”',
+      private_review: 'Great location!”',
+      reply_to: null
+   }
+}
+```
+
+#### write_review
+
+Parse a message about writing a review about a guest
+
+```js
+{
+   write_review: {
+      guest_name: 'Sarah',
+      reply_to: null
+   }
 }
 ```
 

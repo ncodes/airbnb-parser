@@ -8,7 +8,11 @@ var rx = {
 		reservation_request: "^Reservation Request - (.*)$",
 		reservation_reply: "^(RE: )?Reservation request at (.*) for ([a-z0-9 ]+) - ([a-z0-9 ]+), ([0-9]+)$",
 		reservation_confirmed: "^Reservation Confirmed - ([a-z0-9]+)$",
-		reservation_canceled: "Reservation ([a-z0-9]+) on (([a-z]+) ([0-9]+), ([0-9]{4})) Canceled"
+		reservation_canceled: "Reservation ([a-z0-9]+) on (([a-z]+) ([0-9]+), ([0-9]{4})) Canceled",
+		reservation_reminder: "^Reservation Reminder - (.*)$",
+		payout_received: "^Payout of (.*) sent$",
+		read_review: "^Read ((.*)’s) review$",
+		write_review: "^Write a review for (.*)$"
 	}
 }
 
@@ -18,7 +22,11 @@ var parserFuncs = {
 	"reservation_request": require("./parsers/reservation_request").Parse(rx),
 	"reservation_reply": require("./parsers/reservation_reply").Parse(rx),
 	"reservation_confirmed": require("./parsers/reservation_confirmed").Parse(rx),
-	"reservation_canceled": require("./parsers/reservation_canceled").Parse(rx)
+	"reservation_canceled": require("./parsers/reservation_canceled").Parse(rx),
+	"reservation_reminder": require("./parsers/reservation_reminder").Parse(rx),
+	"payout_received": require("./parsers/payout_received").Parse(rx),
+	"read_review": require("./parsers/read_review").Parse(rx),
+	"write_review": require("./parsers/write_review").Parse(rx)
 }
 
 /**

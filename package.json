@@ -17,8 +17,6 @@
   "dependencies": {
     "bluebird": "^3.3.5",
     "cheerio": "^0.20.0",
-    "html-tokenize": "^1.2.5",
-    "lodash": "^4.11.2",
-    "slick": "^1.12.2"
+    "lodash": "^4.11.2"
   }
 }
