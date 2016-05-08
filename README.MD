@@ -67,6 +67,41 @@ Parse message sent by guests. The response object content is:
 }
 ```
 
+#### pending_inquiry
+
+Parse a pending reservation inquiry
+
+```js
+{
+   pending_inquiry:{
+      guest_name: 'Odion',
+      guest_image: 'https://a2.muscache.com/im/pictures/48f2094e-13f0-4793-b38e-5136413826ef.jpg?aki_policy=profile_x_medium',
+      num_guest: '2',
+      guest_city: 'Lagos, Nigeria',
+      listing: 'Ajegunle House',
+      check_in: { day: 'Fri', month: 'May', date: '6' },
+      check_out: { day: 'Sat', month: 'May', date: '7' },
+      reply_to: null
+   }
+}
+```
+### reservation_request
+
+Parse message about a reservation request
+
+```js
+{
+   reservation_request: {
+      guest_name: 'Odion Olumhense',
+      listing: 'Almost Comfortable Treehouse',
+      check_in: { day: 'Tue', month: 'March', date: '01', year: '2016' },
+      check_out: { day: 'Wed', month: 'March', date: '02', year: '2016' },
+      num_guest: '1',
+      reply_to: null
+   }
+}
+```
+
 #### reservation_reply
 
 Parse message sent by guests about a reservation request.

@@ -3,14 +3,15 @@ var Promise = require("bluebird"),
 	_ 		= require("lodash");
 
 
-function parseDate(d) {
-	var rx = new RegExp("^([a-z]+), ([a-z]+) ([0-9]+)$", "i")
+function parseDate(d) { 
+	var rx = new RegExp("^([a-z]+), ([a-z]+) ([0-9]+), ([0-9]{4})$", "i")
 	var m = d.match(rx)
 	if (m) {
 		return {
 			day: m[1],
 			month: m[2],
-			date: m[3]
+			date: m[3],
+			year: m[4]
 		}
 	}
 }
@@ -57,31 +58,26 @@ module.exports = {
 		var result = {}
 
 		// get listing name
-		var listingNameEl = $('td.container span.large', html)
+		var listingNameEl = $('td.listing-info > div > a > strong', html)
 		if ($(listingNameEl[0]).text().trim() == "") return new Error("GetListingInfo: failed to extract listing name");
 		result.listing = $(listingNameEl[0]).text().trim()
 
-		// get check in date
-		var checkInDateEl = $('div > table:nth-child(10) > tbody > tr > td:nth-child(1) > div.strong.text-left', html)
-		if ($(checkInDateEl[0]).text().trim() == "") return new Error("GetListingInfo: failed to extract listing check-in date");
-		var checkInDate = checkInDateEl.text().trim()
+		// get check in and out dates
+		var datesEl = $('table.checkin-widget span.h3 a.link-reset', html)
+		if (datesEl.length != 2) return new Error("GetListingInfo: failed to extract dates");
+		
+		var checkInDate = $(datesEl[0]).text().trim()
 		result.check_in = parseDate(checkInDate)
 
-		// get check out date
-		var checkOutDateEl = $('div > table:nth-child(10) > tbody > tr > td.column.text-left > div.strong.text-left', html)
-		if ($(checkInDateEl[0]).text().trim() == "") return new Error("GetListingInfo: failed to extract listing check-out date");
-		var checkOutDate = checkOutDateEl.text().trim()
+		var checkOutDate = $(datesEl[1]).text().trim()
 		result.check_out = parseDate(checkOutDate)
 
+
 		// get guest number
-		var guestNumEl = $('table:nth-child(11) > tbody > tr:nth-child(2)', html)
+		var guestNumEl = $('td.listing-info > div > a > div > strong', html)
 		if ($(guestNumEl[0]).text().trim() == "") return new Error("GetListingInfo: failed to extract number of guest");
 		result.num_guest = guestNumEl.text().trim()
 
-		// get confirmation code
-		var confirmationCodeEl = $('table:nth-child(12) > tbody > tr:nth-child(2) > td > span', html)
-		if ($(confirmationCodeEl[0]).text().trim() == "") return new Error("GetListingInfo: failed to extract confirmation code");
-		result.confirmation_code = confirmationCodeEl.text().trim()
 
 		return result
 	},
