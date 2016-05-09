@@ -67,6 +67,26 @@ Parse message sent by guests. The response object content is:
 }
 ```
 
+#### booking_inquiry
+
+Parse message sent by guest about a booking reservation. 
+
+```js
+{
+   booking_inquiry:{
+      listing: 'Ajegunle House',
+      check_in: { month: 'May', data: '07', year: '2016' },
+      check_out: { month: 'June', data: '07', year: '2016' },
+      guest_name: 'Angela',
+      guest_image: 'https://a2.muscache.com/im/pictures/d4b0c2esjdasjdasdasdaasdd71.jpg?aki_policy=profile_x_medium',
+      guest_message: 'Hi Kennedy, whats ur exact location? Looking for ...',
+      num_guest: '1',
+      num_nights: '31',
+      reply_to: null
+   }
+}
+```
+
 #### pending_inquiry
 
 Parse a pending reservation inquiry
@@ -75,7 +95,7 @@ Parse a pending reservation inquiry
 {
    pending_inquiry:{
       guest_name: 'Odion',
-      guest_image: 'https://a2.muscache.com/im/pictures/48f2094e-13f0-4793-b38e-5136413826ef.jpg?aki_policy=profile_x_medium',
+      guest_image: 'https://a2.muscache.com/im/pictures/48f2094jsdiasduihusf.jpg?aki_policy=profile_x_medium',
       num_guest: '2',
       guest_city: 'Lagos, Nigeria',
       listing: 'Ajegunle House',
@@ -132,7 +152,7 @@ Parse message sent by guests about a reservation request.
       check_in: { date: '9', month: 'May', year: '2016' },
       check_out: { month: 'May', date: '10', year: '2016' },
       guest_name: 'Odion',
-      guest_image: 'https://a2.muscache.com/im/pictures/48f2094e-13f0-4793-b38e-5136413826ef.jpg?aki_policy=profile_medium',
+      guest_image: 'https://a2.muscache.com/im/pictures/48f2094e-13f0dasuiuabsibs13826ef.jpg?aki_policy=profile_medium',
       guest_message: 'Waiting',
       num_guest: '2',
       listing_url: 'https://www.airbnb.com/rooms/12896709',
