@@ -2,19 +2,6 @@ var Promise = require("bluebird"),
 	$ 		= require('cheerio'),
 	_ 		= require("lodash");
 
-function parseDate(d) { 
-	var rx = new RegExp("^([a-z]+), ([a-z]+) ([0-9]+), ([0-9]{4})$", "i")
-	var m = d.match(rx)
-	if (m) {
-		return {
-			day: m[1],
-			month: m[2],
-			date: m[3],
-			year: m[4]
-		}
-	}
-}
-
 /**
  * Parse inquiry message
  * @param  {Object} msgObj message object
@@ -41,16 +28,14 @@ module.exports = {
 		var m = subject.match(new RegExp(rx, "i"))
 		if (m) {
 			result.listing = m[1]
-			
 			result.check_in = {}
 			result.check_out = {}
 			result.check_in.month = m[3]
 			result.check_in.date = m[4]
-			result.check_in.year = m[5]
-			result.check_out.month = m[7]
-			result.check_out.date = m[8]
-			result.check_out.year = m[9]
-
+			result.check_in.year = m[6]
+			result.check_out.month = m[3]
+			result.check_out.date = m[5]
+			result.check_out.year = m[6]
 			return result
 		}
 		return new Error("ParseSubject: failed to parse subject")
@@ -122,7 +107,7 @@ module.exports = {
 					return
 				}
 
-				result[msgType] = _.extend( subjectData, guestInfo, { reply_to: msgObj.replyTo })
+				result["booking_inquiry"] = _.extend( subjectData, guestInfo, { reply_to: msgObj.replyTo })
 				resolve(result)
 			});
 		}

@@ -7,6 +7,7 @@ var rx = {
 	subject: {
 		inquiry: "^(RE: )?Inquiry at (.*) for ([a-z0-9 ]+) - ([a-z0-9 ]+), ([0-9]+)$",
 		booking_inquiry: "^Booking inquiry for (.*) for (([a-z]+) ([0-9]+), ([0-9]{4})) - (([a-z]+) ([0-9]+), ([0-9]{4}))$",
+		booking_inquiry2: "^Booking inquiry for (.*) for (([a-z]+) ([0-9]+) - ([0-9]+), ([0-9]{4}))$",
 		pending_inquiry: "^Pending: Reservation Request - (.*)$",
 		reservation_request: "^Reservation Request - (.*)$",
 		reservation_reply: "^(RE: )?Reservation request at (.*) for ([a-z0-9 ]+) - ([a-z0-9 ]+), ([0-9]+)$",
@@ -22,6 +23,7 @@ var rx = {
 var parserFuncs = {
 	"inquiry": require("./parsers/inquiry").Parse(rx),
 	"booking_inquiry": require("./parsers/booking_inquiry").Parse(rx),
+	"booking_inquiry2": require("./parsers/booking_inquiry2").Parse(rx),
 	"pending_inquiry": require("./parsers/pending_inquiry").Parse(rx),
 	"reservation_request": require("./parsers/reservation_request").Parse(rx),
 	"reservation_reply": require("./parsers/reservation_reply").Parse(rx),
