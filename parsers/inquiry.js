@@ -123,6 +123,18 @@ module.exports = {
 	},
 
 	/**
+	 * Get reply link
+	 * @param {String} html the html content
+	 */
+	GetReplyLink: function (html) {
+		var value = ""
+		var m = html.match(new RegExp('"(https://www.airbnb.com/z/q/([0-9]+).*)(?="([ ]{1}|,"))', "i"))
+		if (!m) return new Error("GetReplyLink: failed to extract reply link")
+		value = m[1]
+		return value
+	},
+
+	/**
 	 * Parse an inquiry message
 	 * @param {Object} rxCollection regular expression collection
 	 */
@@ -151,6 +163,15 @@ module.exports = {
 				if (listingInfo instanceof Error) {
 					reject(new Error(msgType + "/Parse: " + listingInfo.message))
 					return
+				}
+
+				// get reply link
+				var replyLink = self.GetReplyLink(msgObj.html)
+				if (replyLink instanceof Error) {
+					reject(new Error(msgType + "/Parse: " + replyLink.message))
+					return
+				} else {
+					guestInfo.reply_link = replyLink
 				}
 
 				result[msgType] = _.extend(subjectData, guestInfo, listingInfo, { reply_to: msgObj.replyTo })
