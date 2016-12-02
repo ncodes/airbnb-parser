@@ -30,27 +30,38 @@ module.exports = {
 		var checkOut = {}
 
 		// get listing name
-		var listingNameEl = $('div.from-user-inquiry h3:first-child', html)
+		var listingNameEl = $('div.header-banner p.row-space-top-1', html)
 		if (listingNameEl.length == 0) return new Error("GetListingInfo: failed to extract listing name");
-		result.listing = $(listingNameEl[0]).text()
+		result.listing = listingNameEl.text().trim().split(" at ")[1]
 
-		// get check in and check out times
-		var listingDateEl = $('table.trip-summary', html)
-		if (listingDateEl.length == 0) return new Error("GetListingInfo: failed to extract date info");
-		var date = $(listingDateEl).text().trim().replace(new RegExp("[ ]+", "mg"), " ")
-		date = date.replace(new RegExp("[\\n]{1,}", "gm"), "-", 1)
-		var rx = new RegExp("^(([a-z]+), ([a-z]+) ([0-9]+))[\- ]+(([a-z]+), ([a-z]+) ([0-9]+))$", "i")
+		// get checkin info
+		var checkInDateEl = $('table.row.row-space-top-4 tr td:first-child.column div:nth-child(2)', html)
+		if (checkInDateEl.length == 0) return new Error("GetListingInfo: failed to extract checkin date info");
+		var rx = new RegExp("^([a-z]+), ([a-z]+) ([0-9]+)$", "i")
+		var date = checkInDateEl.text().trim()
 		var m = date.match(rx)
 		if (!m) {
-			return new Error("GetListingInfo: failed to extract listing date");
+			return new Error("GetListingInfo: failed to extract listing checkin date");
 		}
-	
-		checkIn.day = m[2]
-		checkIn.month = m[3]
-		checkIn.date = m[4]
-		checkOut.day = m[6]
-		checkOut.month = m[7]
-		checkOut.date = m[8]
+
+		checkIn.day = m[1]
+		checkIn.month = m[2]
+		checkIn.date = m[3]
+
+		// get checkin info
+		var checkOutDateEl = $('table.row.row-space-top-4 tr td:nth-child(2).column div:nth-child(2)', html)
+		if (checkOutDateEl.length == 0) return new Error("GetListingInfo: failed to extract check out date info");
+		rx = new RegExp("^([a-z]+), ([a-z]+) ([0-9]+)$", "i")
+		date = checkOutDateEl.text().trim()
+		m = date.match(rx)
+		if (!m) {
+			return new Error("GetListingInfo: failed to extract listing check out date");
+		}
+
+		checkOut.day = m[1]
+		checkOut.month = m[2]
+		checkOut.date = m[3]
+
 		result.check_in = checkIn
 		result.check_out = checkOut		
 
@@ -79,12 +90,12 @@ module.exports = {
 		var guestImageEl = $('td.profile-image-box img[src^="https://a2.muscache.com/im/pictures/"]', html)
 		if (guestImageEl.length == 0) return new Error("GetGuestInfo: failed to extract guest image");
 		result.guest_image = $(guestImageEl).attr('src')
-
+		
 		// get guest number
-		var guestNumEl = $('p.details-list span:first-child', html)
+		var guestNumEl = $('body table.row tr td.container div table.row.row-space-2.row-space-top-4.text-large tr:nth-child(2) td span', html)
 		if (guestNumEl.length == 0) return new Error("GetGuestInfo: failed to extract guest number");
-		result.num_guest = $(guestNumEl).text().trim().split(" ")[0];
-
+		result.num_guest = $(guestNumEl).text().trim();
+		
 		// get user city
 		var guestCityEl = $('div.user-details span.user_city', html)
 		if (guestCityEl.length == 0) return new Error("GetGuestInfo: failed to extract guest city");

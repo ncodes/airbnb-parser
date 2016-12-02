@@ -1,6 +1,6 @@
 {
   "name": "airbnb-parser",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Extract information from airbnb email notifications",
   "main": "index.js",
   "scripts": {
