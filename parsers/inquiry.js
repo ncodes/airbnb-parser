@@ -75,12 +75,12 @@ module.exports = {
 		var result = {}
 
 		// get guest name
-		var guestNameEl = $('a[href^="https://www.airbnb.com/users/show/"] span', html)
+		var guestNameEl = $('a[href*="/users/show/"] span', html)
 		if (guestNameEl.length == 0) return new Error("GetGuestInfo: failed to extract guest name tag");
 		result.guest_name = $(guestNameEl[0]).text()
-
+		
 		// get guest photo
-		var photoEl = $('td.photo img[src^="https://a2.muscache.com/im/pictures"]', html)
+		var photoEl = $('td.photo img[src*="/im/pictures"]', html)
 		if (photoEl.length == 0) return new Error("GetGuestInfo: failed to extract photo url");
 		result.guest_image = $(photoEl[0]).attr("src")
 
